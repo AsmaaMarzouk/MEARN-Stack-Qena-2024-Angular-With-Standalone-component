@@ -1,0 +1,77 @@
+<!-- Day3 -->
+<!-- <h2>{{date1|date:'short'}}</h2> -->
+
+<!-- ######################### -->
+<!-- @for(i of Object){} -->
+<div class="container">
+  <button class="btn btn-primary" (click)="toggleImg()">Toggle Image</button>
+
+
+  <!-- <input type="text" class="form-control" [value]="user"> -->
+  <!-- <input type="text" class="form-control" [(ngModel)]="user"> -->
+
+  <!-- <h3>{{user}}</h3> -->
+
+  <!-- <div>
+    <label for="filterByName">Filter By name</label>
+    <input type="text" class="form-control" id="filterByName" name="filterByName" [(ngModel)]="listFilterValue">
+  </div> -->
+  <br>
+  <div class="row">
+
+    <!-- @for(item of productList;track item.id){ -->
+    @for(item of productsListFilter;track item.id){
+    <div class="col-sm-4 mb-4">
+      <!-- <div class="col-sm-4 mb-4" [class.text-danger]="item.price>10000" [class.class1]="item.quantity==0"> -->
+      <!-- <div class="col-sm-4 mb-4" [style.color]="(item.price>10000)?'red':'blue'" > -->
+
+
+      <!-- attribute directive -->
+      <!-- ngClass -->
+      <!-- <div class="col-sm-4 mb-4" [ngClass]="{'text-danger':item.price<10000,'bg-warning':item.quantity==0}" > -->
+      <!-- <div class="col-sm-4 mb-4" [ngStyle]="{'color':(item.price<10000)?'red':'blue','background-color':(item.categoryID==1)?'lightgrey':'lightgreen'}" > -->
+
+      @if(showImage){
+      <img [src]="item.PrdimgURL" class="img-fluid" ImgStyle="5px" radius1="30px">
+      }
+      <h3>{{item.name|uppercase}}</h3>
+      <h5 class="text-decoration-line-through">{{item.price|currency:'USD':'symbol'}}</h5>
+      <h5>{{item.price|calcDiscount:50|currency:'USD'}}</h5>
+
+      <div>
+        @if(item.quantity>4){
+        <h2>{{item.quantity}}</h2>
+        }
+        @else if (item.quantity==2) {
+        <h3>Two item</h3>
+        }
+        @else {
+        <h2 class="text-danger">Out of stock</h2>
+        }
+      </div>
+
+      <div>
+        @switch (item.categoryID) {
+        @case (1) {
+        Table
+        }
+        @case(2){
+        Chairs
+        }
+        @default {
+        TV Unit
+        }
+        }
+      </div>
+      <button class="btn btn-danger" [disabled]="item.quantity==0" (click)="addToCart(item)">Add To Cart<i
+          class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i></button>
+    </div>
+
+    }
+
+    @empty {
+
+    <h2>No Thing To show</h2>
+    }
+  </div>
+</div>

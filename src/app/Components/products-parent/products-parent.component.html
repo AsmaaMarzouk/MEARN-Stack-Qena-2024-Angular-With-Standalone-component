@@ -1,0 +1,32 @@
+<h1>Parent component</h1>
+<div>
+  <label for="filterByName">Filter By name</label>
+  <input type="text" class="form-control" id="filterByName" name="filterByName" [(ngModel)]="listFilterValue">
+</div>
+
+
+
+<!-- child -->
+<app-products-list [listFilterValueInchild]="listFilterValue" (addPrdsEvent)="addFunc($event)"></app-products-list>
+
+
+
+<caption>Cart</caption>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    @for(item of cart;track item.id){
+    <tr>
+      <td>{{item.name}}</td>
+      <td>{{item.price|calcDiscount:50}}</td>
+    </tr>
+    }
+  </tbody>
+</table>
