@@ -5,5 +5,6 @@ export interface Iproduct {
   quantity:number,
   categoryID:number,
   Material:string,
-  PrdimgURL:string
+  PrdimgURL:string,
+  details:string
 }

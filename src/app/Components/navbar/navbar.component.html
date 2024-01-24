@@ -12,12 +12,11 @@
           </label>
           <div class="nav-container">
               <ul class="nav-tabs">
-                  <li class="nav-tab">Home</li>
-                  <li class="nav-tab">Products</li>
-                  <li class="nav-tab">Services</li>
-                  <li class="nav-tab">FAQ</li>
-                  <li class="nav-tab">Contact</li>
-                  <li class="nav-tab">Careers</li>
+                <!-- <li class="nav-tab"><a routerLink="/Home" routerLinkActive="classactive">Home</a></li> -->
+                <li class="nav-tab"><a [routerLink]="['/Home']" routerLinkActive="classactive">Home</a></li>
+                  <li class="nav-tab"><a routerLink="/Products" routerLinkActive="classactive">Products</a></li>
+                  <li class="nav-tab"><a routerLink="/ProductsParent" routerLinkActive="classactive">Products Parent</a></li>
+                  <li class="nav-tab"><a routerLink="/AboutUs" routerLinkActive="classactive">About Us</a></li>
               </ul>
           </div>
       </nav>

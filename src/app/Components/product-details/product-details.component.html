@@ -1,0 +1,45 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-6">
+
+      <img [src]="product?.PrdimgURL" alt="">
+    </div>
+    <div class="col-md-6">
+
+      <h1>{{product?.name}}</h1>
+    </div>
+  </div> -->
+
+<!-- </div> -->
+
+
+<div class="container">
+
+  @if(product){
+  <div class="row mb-3">
+    <div class="col-md-6">
+
+      <h4> @switch (product.quantity) {
+        @case (0) {Out Of Stock}
+        @case (1) {Last One Item}
+        @case (2) {Last Two Item}
+        @default {In Stock}
+        }</h4>
+      <img [src]="product.PrdimgURL" class="img-fluid">
+    </div>
+    <div class="col-md-6">
+
+      <h1>{{product.name}}</h1>
+      <h2>Price: {{product.price|currency}}</h2>
+      <h3>Material: {{product.Material}}</h3>
+      <h3>{{product.details}}</h3>
+    </div>
+  </div>
+  }
+
+
+</div>
+
+<!-- <button class="button-91" (click)="goBackFunc()">Back</button> -->
+<button class="button-91" [routerLink]="['/Products']">Back</button>
+

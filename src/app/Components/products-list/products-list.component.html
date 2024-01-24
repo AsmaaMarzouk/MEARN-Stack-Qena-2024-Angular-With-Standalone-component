@@ -21,7 +21,7 @@
 
     <!-- @for(item of productList;track item.id){ -->
     @for(item of productsListFilter;track item.id){
-    <div class="col-sm-4 mb-4">
+    <div class="col-sm-4 mb-4" (click)="goPrdDetails(item.id)">
       <!-- <div class="col-sm-4 mb-4" [class.text-danger]="item.price>10000" [class.class1]="item.quantity==0"> -->
       <!-- <div class="col-sm-4 mb-4" [style.color]="(item.price>10000)?'red':'blue'" > -->
 
