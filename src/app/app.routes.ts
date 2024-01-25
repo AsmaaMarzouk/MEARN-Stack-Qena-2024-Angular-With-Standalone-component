@@ -6,6 +6,7 @@ import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { NotFoundPageComponent } from './Components/not-found-page/not-found-page.component';
 import { GroupOfRoutesComponent } from './Components/group-of-routes/group-of-routes.component';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
+import { ObsAndOperatorsComponent } from './Components/obs-and-operators/obs-and-operators.component';
 
 export const routes: Routes = [
   // first match wins
@@ -24,6 +25,7 @@ export const routes: Routes = [
   },
   {path:'prd/:productID',component:ProductDetailsComponent,title:"Product details page"},
   { path: 'AboutUs', component: AboutUsComponent, title: 'About Page' },
+  { path: 'Obs', component: ObsAndOperatorsComponent, title: 'Observer Page' },
   { path: '**', component: NotFoundPageComponent, title: 'Not found page' },
   //wild card path => not found page
 ];

@@ -6,6 +6,7 @@ import { Iproduct } from '../../Model/iproduct';
 import { ImgStyleDirective } from '../../Directives/img-style.directive';
 import { ProductsService } from '../../Services/products.service';
 import { Router } from '@angular/router';
+import { ProductsWithApiService } from '../../Services/products-with-api.service';
 
 @Component({
   selector: 'app-products-list',
@@ -36,9 +37,18 @@ export class ProductsListComponent {
 
     // this.productsListFilter = this.performFilter(value);
     // Day4
-    this.productsListFilter = this.prdService.performFilter(value);
+    // this.productsListFilter = this.prdService.performFilter(value);
     // console.log(this.performFilter(value));
-    console.log(this.productsListFilter);
+    // console.log(this.productsListFilter);
+
+
+    // Day5
+
+    this.productWithApiService.getAllPrds().subscribe(data => {
+      this.productsListFilter=data.filter(prd=>prd.name.toLowerCase().includes(value));
+      console.log(this.productsListFilter);
+
+    })
   }
 
   //  @Output() addPrdsEvent:EventEmitter<Iproduct>=new EventEmitter<Iproduct>();
@@ -49,7 +59,9 @@ export class ProductsListComponent {
   // 1 => tables , 2=> chairs , 3=> tv units
 
   // Day4 => inject
-  constructor(public prdService:ProductsService,private router:Router) {
+
+  // Day5 => inject products service with api
+  constructor(public prdService:ProductsService,private router:Router,private productWithApiService:ProductsWithApiService) {
     // this.productList = [
     //   {
     //     id: 1,
@@ -147,7 +159,23 @@ export class ProductsListComponent {
   }
   ngOnInit(): void {
     // this.productsListFilter = this.productList;
-    this.productsListFilter = this.prdService.getAllPrd();
+    // Day4
+    // this.productsListFilter = this.prdService.getAllPrd();
+
+    // Day5
+
+    this.productWithApiService.getAllPrds().subscribe({
+      next:(data)=>{
+        // console.log(data);
+        this.productsListFilter=data;
+
+      },
+      error:(err)=>{
+
+        console.log(err);
+
+      }
+    })
   }
 
   toggleImg() {
