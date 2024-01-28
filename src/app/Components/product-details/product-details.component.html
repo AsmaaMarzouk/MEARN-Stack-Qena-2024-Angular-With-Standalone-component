@@ -11,7 +11,32 @@
   </div> -->
 
 <!-- </div> -->
+<!-- Day6 -->
+<div class="col-md-5 mx-auto">
+  <div class="small fw-light">search with materail</div>
+  <div class="input-group">
 
+    <!-- template reference =>  #anyName -->
+    <input class="form-control border-end-0 border rounded-pill" type="text"
+      id="example-search-input" #searchValue>
+    <span class="input-group-append">
+      <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button" (click)="search(searchValue.value)">
+        <i class="fa fa-search"></i>
+      </button>
+    </span>
+  </div>
+</div>
+
+<!-- index=> start from zero -->
+<!-- built in variable in @for  -->
+<ul>
+  @for(result of productsAfterSearch;track $index){
+
+    <li>{{$index+1}}- {{result.name}}</li>
+  }
+</ul>
+
+<!-- ############################################ -->
 
 <div class="container">
 

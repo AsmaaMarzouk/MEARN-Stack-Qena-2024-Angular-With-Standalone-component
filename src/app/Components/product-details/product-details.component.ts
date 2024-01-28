@@ -20,13 +20,19 @@ export class ProductDetailsComponent implements OnInit {
   prdIDList: number[] = [];
 
   currIndex: number = 0;
+
   // ########################
+  // Day6
+
+  productsAfterSearch: Iproduct[] = [];
+
+  // ######################
   // inject
   constructor(
     private ProductService: ProductsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private productWithApiService:ProductsWithApiService
+    private productWithApiService: ProductsWithApiService
   ) {}
   ngOnInit(): void {
     //convert to number =>  parseInt(),Number , +
@@ -40,32 +46,25 @@ export class ProductDetailsComponent implements OnInit {
 
     // console.log(this.product);
 
-    this.prdIDList=this.ProductService.getPrdIDSList();
+    this.prdIDList = this.ProductService.getPrdIDSList();
     // console.log(this.prdIDList);
-    this.activatedRoute.paramMap.subscribe( paramMap =>{
-
-      this.prdID = (paramMap.get('productID'))?Number(paramMap.get('productID')):0;
+    this.activatedRoute.paramMap.subscribe((paramMap) => {
+      this.prdID = paramMap.get('productID')
+        ? Number(paramMap.get('productID'))
+        : 0;
 
       // this.product=this.ProductService.getPrdByID(this.prdID);
 
-      this.productWithApiService.getPrdByID(this.prdID).subscribe(
-        {
-          next:(data)=>{
-
-            console.log(data);
-
-          },
-          error:(err)=>{
-
-            console.log(err);
-
-          }
-        }
-      )
-    }
-
-    )
-
+      this.productWithApiService.getPrdByID(this.prdID).subscribe({
+        next: (data) => {
+          // console.log(data);
+          this.product = data;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    });
   }
 
   goBackFunc() {
@@ -74,20 +73,30 @@ export class ProductDetailsComponent implements OnInit {
 
   // Day5
 
-  previousFunc(){
-
-     this.currIndex= this.prdIDList.indexOf(this.prdID);
+  previousFunc() {
+    this.currIndex = this.prdIDList.indexOf(this.prdID);
     //  console.log(this.currIndex);
-    this.router.navigate(['/prd',this.prdIDList[--this.currIndex]])
+    this.router.navigate(['/prd', this.prdIDList[--this.currIndex]]);
     // arr[0] =
-
-
   }
-  nextFunc(){
-    this.currIndex= this.prdIDList.indexOf(this.prdID);
+  nextFunc() {
+    this.currIndex = this.prdIDList.indexOf(this.prdID);
     // console.log(this.currIndex);
-    this.router.navigate(['/prd',this.prdIDList[++this.currIndex]])
+    this.router.navigate(['/prd', this.prdIDList[++this.currIndex]]);
+  }
 
+  // Day6
+  search(material: string) {
+    this.productWithApiService.searchPrdWithMaterial(material).subscribe({
+      next: (data) => {
+        // console.log(data);
+        this.productsAfterSearch=data;
+        // console.log(this.productsAfterSearch);
 
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
