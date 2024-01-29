@@ -9,6 +9,8 @@ import { ProductDetailsComponent } from './Components/product-details/product-de
 import { ObsAndOperatorsComponent } from './Components/obs-and-operators/obs-and-operators.component';
 import { UserTemplateFormComponent } from './Components/User/user-template-form/user-template-form.component';
 import { UserReactiveFormComponent } from './Components/User/user-reactive-form/user-reactive-form.component';
+import { UserAuthenComponent } from './Components/user-authen/user-authen.component';
+import { userGuard } from './Guards/user.guard';
 
 export const routes: Routes = [
   // first match wins
@@ -19,17 +21,21 @@ export const routes: Routes = [
     path: 'Products',
     component: ProductsListComponent,
     title: 'Products list page',
+    canActivate:[userGuard]
   },
   {
     path: 'ProductsParent',
     component: ProductsParentComponent,
     title: 'Products parent page',
+
   },
   {path:'prd/:productID',component:ProductDetailsComponent,title:"Product details page"},
   { path: 'AboutUs', component: AboutUsComponent, title: 'About Page' },
   { path: 'Obs', component: ObsAndOperatorsComponent, title: 'Observer Page' },
   { path: 'UserTemplate', component: UserTemplateFormComponent, title: 'User Template Page' },
   { path: 'UserReactive', component: UserReactiveFormComponent, title: 'User Reactive Page' },
+  { path: 'UserLogin', component: UserAuthenComponent, title: 'User Auth Page' },
+  { path: 'UserLogout', component: UserAuthenComponent, title: 'User Auth Page' },
   { path: '**', component: NotFoundPageComponent, title: 'Not found page' },
   //wild card path => not found page
 ];

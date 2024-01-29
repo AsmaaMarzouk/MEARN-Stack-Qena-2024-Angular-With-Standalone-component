@@ -43,7 +43,22 @@
           </div>
         </div>
 
-        <!-- <button type="button" class="btn btn-primary">Add Address</button> -->
+        Address:
+        <div formArrayName="address">
+          @for(control of address.controls;track $index){
+          <div [formGroupName]="$index">
+            city name :
+            <input type="text" formControlName="city">
+            street:
+            <input type="text" formControlName="street">
+
+            <button class="btn btn-danger" (click)="removeAddress($index)">Remove</button>
+          </div>
+        }
+
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addAddress()">Add Address</button>
+
 
         <br>
         <button type="submit" class="btn btn-success">Submit</button>
